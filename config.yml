@@ -1,24 +1,16 @@
 server:
   addr: :{{ env "PORT" }}
-
 token:
   issuer: "Acme Auth Server"
   expiration: 900
   certificate: {{ env "PLATFORM_DIR" }}/server.crt
   key: /tmp/server.key
-
 users:
-{{ range $name, $password := (var "users") }}
+{{- range $name, $password := (json (var "$.users")) }}
   "{{ $name }}":
     password: {{ bcrypt $password }}
-{{ end }}
+{{- end }}
 acl:
-  - match: {ip: "127.0.0.0/8"}
-    actions: ["*"]
-    comment: Allow everything from localhost (IPv4)
-  - match: {ip: "::1"}
-    actions: ["*"]
-    comment: Allow everything from localhost (IPv6)
   - match: {account: "admin"}
     actions: ["*"]
     comment: Admin has full access to everything
