@@ -16,11 +16,9 @@ trap 'chmod -R +w "$GOPATH" && rm -rf "$GOPATH"' EXIT
 unset GO111MODULE
 
 outdir=${GOPATH}/src/github.com/cesanta/docker_auth
-git clone https://github.com/cesanta/docker_auth.git "$outdir"
+git clone -b 1.4.0 https://github.com/cesanta/docker_auth.git "$outdir"
 (
-	cd "$outdir" &&
-		git checkout 'b89dec9a4f0098fb0f71d9b94e44d1710c1fe5cf' &&
-		cd "auth_server" &&
+	cd "$outdir/auth_server" &&
 		make deps &&
 		make generate &&
 		make &&
