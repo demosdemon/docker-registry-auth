@@ -1,6 +1,5 @@
 server:
   addr: :{{ env "PORT" }}
-  path_prefix: "/auth"
 
 token:
   issuer: "Acme Auth Server"
