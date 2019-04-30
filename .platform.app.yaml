@@ -7,7 +7,7 @@
 name: auth
 
 # The runtime the application uses.
-type: golang:1.11
+type: golang:1.12
 
 # Any build or runtime dependencies
 dependencies:
